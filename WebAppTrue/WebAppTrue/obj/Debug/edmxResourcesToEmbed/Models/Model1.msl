@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ForAPIModelContainer" CdmEntityContainer="ForAPIEntities">
+    <EntitySetMapping Name="ChatMessage">
+      <EntityTypeMapping TypeName="ForAPIModel.ChatMessage">
+        <MappingFragment StoreEntitySet="ChatMessage">
+          <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+          <ScalarProperty Name="textMessage" ColumnName="textMessage" />
+          <ScalarProperty Name="idChatRoom" ColumnName="idChatRoom" />
+          <ScalarProperty Name="idEmplyee" ColumnName="idEmplyee" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChatRoom">
+      <EntityTypeMapping TypeName="ForAPIModel.ChatRoom">
+        <MappingFragment StoreEntitySet="ChatRoom">
+          <ScalarProperty Name="Topic" ColumnName="Topic" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChatRoomEmploee">
+      <EntityTypeMapping TypeName="ForAPIModel.ChatRoomEmploee">
+        <MappingFragment StoreEntitySet="ChatRoomEmploee">
+          <ScalarProperty Name="idEmplyee" ColumnName="idEmplyee" />
+          <ScalarProperty Name="idChatRoom" ColumnName="idChatRoom" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Emplyee">
+      <EntityTypeMapping TypeName="ForAPIModel.Emplyee">
+        <MappingFragment StoreEntitySet="Emplyee">
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="idType" ColumnName="idType" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ForAPIModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Type">
+      <EntityTypeMapping TypeName="ForAPIModel.Type">
+        <MappingFragment StoreEntitySet="Type">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

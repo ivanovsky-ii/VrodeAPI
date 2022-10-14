@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ForAPIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ForAPIEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ChatMessage" EntityType="ForAPIModel.ChatMessage" />
+    <EntitySet Name="ChatRoom" EntityType="ForAPIModel.ChatRoom" />
+    <EntitySet Name="ChatRoomEmploee" EntityType="ForAPIModel.ChatRoomEmploee" />
+    <EntitySet Name="Emplyee" EntityType="ForAPIModel.Emplyee" />
+    <EntitySet Name="sysdiagrams" EntityType="ForAPIModel.sysdiagrams" />
+    <EntitySet Name="Type" EntityType="ForAPIModel.Type" />
+    <AssociationSet Name="FK_ChatMessage_ChatRoom" Association="ForAPIModel.FK_ChatMessage_ChatRoom">
+      <End Role="ChatRoom" EntitySet="ChatRoom" />
+      <End Role="ChatMessage" EntitySet="ChatMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChatMessage_Emplyee" Association="ForAPIModel.FK_ChatMessage_Emplyee">
+      <End Role="Emplyee" EntitySet="Emplyee" />
+      <End Role="ChatMessage" EntitySet="ChatMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChatRoomEmploee_ChatRoom" Association="ForAPIModel.FK_ChatRoomEmploee_ChatRoom">
+      <End Role="ChatRoom" EntitySet="ChatRoom" />
+      <End Role="ChatRoomEmploee" EntitySet="ChatRoomEmploee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChatRoomEmploee_Emplyee" Association="ForAPIModel.FK_ChatRoomEmploee_Emplyee">
+      <End Role="Emplyee" EntitySet="Emplyee" />
+      <End Role="ChatRoomEmploee" EntitySet="ChatRoomEmploee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Emplyee_Type" Association="ForAPIModel.FK_Emplyee_Type">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="Emplyee" EntitySet="Emplyee" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ChatMessage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idEmplyee" Type="Int32" />
+    <Property Name="idChatRoom" Type="Int32" />
+    <Property Name="textMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="dateTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ChatRoom" Relationship="ForAPIModel.FK_ChatMessage_ChatRoom" FromRole="ChatMessage" ToRole="ChatRoom" />
+    <NavigationProperty Name="Emplyee" Relationship="ForAPIModel.FK_ChatMessage_Emplyee" FromRole="ChatMessage" ToRole="Emplyee" />
+  </EntityType>
+  <EntityType Name="ChatRoom">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Topic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ChatMessage" Relationship="ForAPIModel.FK_ChatMessage_ChatRoom" FromRole="ChatRoom" ToRole="ChatMessage" />
+    <NavigationProperty Name="ChatRoomEmploee" Relationship="ForAPIModel.FK_ChatRoomEmploee_ChatRoom" FromRole="ChatRoom" ToRole="ChatRoomEmploee" />
+  </EntityType>
+  <EntityType Name="ChatRoomEmploee">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idChatRoom" Type="Int32" />
+    <Property Name="idEmplyee" Type="Int32" />
+    <NavigationProperty Name="ChatRoom" Relationship="ForAPIModel.FK_ChatRoomEmploee_ChatRoom" FromRole="ChatRoomEmploee" ToRole="ChatRoom" />
+    <NavigationProperty Name="Emplyee" Relationship="ForAPIModel.FK_ChatRoomEmploee_Emplyee" FromRole="ChatRoomEmploee" ToRole="Emplyee" />
+  </EntityType>
+  <EntityType Name="Emplyee">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="idType" Type="Int32" />
+    <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ChatMessage" Relationship="ForAPIModel.FK_ChatMessage_Emplyee" FromRole="Emplyee" ToRole="ChatMessage" />
+    <NavigationProperty Name="ChatRoomEmploee" Relationship="ForAPIModel.FK_ChatRoomEmploee_Emplyee" FromRole="Emplyee" ToRole="ChatRoomEmploee" />
+    <NavigationProperty Name="Type" Relationship="ForAPIModel.FK_Emplyee_Type" FromRole="Emplyee" ToRole="Type" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Emplyee" Relationship="ForAPIModel.FK_Emplyee_Type" FromRole="Type" ToRole="Emplyee" />
+  </EntityType>
+  <Association Name="FK_ChatMessage_ChatRoom">
+    <End Type="ForAPIModel.ChatRoom" Role="ChatRoom" Multiplicity="0..1" />
+    <End Type="ForAPIModel.ChatMessage" Role="ChatMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChatRoom">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ChatMessage">
+        <PropertyRef Name="idChatRoom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChatMessage_Emplyee">
+    <End Type="ForAPIModel.Emplyee" Role="Emplyee" Multiplicity="0..1" />
+    <End Type="ForAPIModel.ChatMessage" Role="ChatMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Emplyee">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ChatMessage">
+        <PropertyRef Name="idEmplyee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChatRoomEmploee_ChatRoom">
+    <End Type="ForAPIModel.ChatRoom" Role="ChatRoom" Multiplicity="0..1" />
+    <End Type="ForAPIModel.ChatRoomEmploee" Role="ChatRoomEmploee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChatRoom">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ChatRoomEmploee">
+        <PropertyRef Name="idChatRoom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChatRoomEmploee_Emplyee">
+    <End Type="ForAPIModel.Emplyee" Role="Emplyee" Multiplicity="0..1" />
+    <End Type="ForAPIModel.ChatRoomEmploee" Role="ChatRoomEmploee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Emplyee">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ChatRoomEmploee">
+        <PropertyRef Name="idEmplyee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Emplyee_Type">
+    <End Type="ForAPIModel.Type" Role="Type" Multiplicity="0..1" />
+    <End Type="ForAPIModel.Emplyee" Role="Emplyee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Emplyee">
+        <PropertyRef Name="idType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
