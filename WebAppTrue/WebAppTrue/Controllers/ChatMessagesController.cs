@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -13,47 +13,44 @@ using WebAppTrue.Models;
 
 namespace WebAppTrue.Controllers
 {
-    public class ChatRoomsController : ApiController
+    public class ChatMessagesController : ApiController
     {
         private ForAPIEntities db = new ForAPIEntities();
 
-        // GET: api/ChatRooms
-        //[HttpGet]
-        //[Route("api/ChatRoom")]
-        [ResponseType(typeof(ResponceChatRoom))]
-        public IHttpActionResult GetChatRoom()
+        // GET: api/ChatMessages
+        public IHttpActionResult GetChatMessage()
         {
-            return Ok(db.ChatRoom.Include(i => i.ChatMessage).ToList().ConvertAll(i=> new ResponceChatRoom(i)));
+            return Ok(db.ChatMessage.ToList().ConvertAll(i => new ResponceChatMessage(i)));
         }
 
-        // GET: api/ChatRooms/5
-        [ResponseType(typeof(ChatRoom))]
-        public IHttpActionResult GetChatRoom(int id)
+        // GET: api/ChatMessages/5
+        [ResponseType(typeof(ChatMessage))]
+        public IHttpActionResult GetChatMessage(int id)
         {
-            ChatRoom chatRoom = db.ChatRoom.Find(id);
-            if (chatRoom == null)
+            ChatMessage chatMessage = db.ChatMessage.Find(id);
+            if (chatMessage == null)
             {
                 return NotFound();
             }
 
-            return Ok(chatRoom);
+            return Ok(chatMessage);
         }
 
-        // PUT: api/ChatRooms/5
+        // PUT: api/ChatMessages/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutChatRoom(int id, ChatRoom chatRoom)
+        public IHttpActionResult PutChatMessage(int id, ChatMessage chatMessage)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != chatRoom.id)
+            if (id != chatMessage.id)
             {
                 return BadRequest();
             }
 
-            db.Entry(chatRoom).State = EntityState.Modified;
+            db.Entry(chatMessage).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +58,7 @@ namespace WebAppTrue.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ChatRoomExists(id))
+                if (!ChatMessageExists(id))
                 {
                     return NotFound();
                 }
@@ -74,35 +71,35 @@ namespace WebAppTrue.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/ChatRooms
-        [ResponseType(typeof(ChatRoom))]
-        public IHttpActionResult PostChatRoom(ChatRoom chatRoom)
+        // POST: api/ChatMessages
+        [ResponseType(typeof(ChatMessage))]
+        public IHttpActionResult PostChatMessage(ChatMessage chatMessage)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.ChatRoom.Add(chatRoom);
+            db.ChatMessage.Add(chatMessage);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = chatRoom.id }, chatRoom);
+            return CreatedAtRoute("DefaultApi", new { id = chatMessage.id }, chatMessage);
         }
 
-        // DELETE: api/ChatRooms/5
-        [ResponseType(typeof(ChatRoom))]
-        public IHttpActionResult DeleteChatRoom(int id)
+        // DELETE: api/ChatMessages/5
+        [ResponseType(typeof(ChatMessage))]
+        public IHttpActionResult DeleteChatMessage(int id)
         {
-            ChatRoom chatRoom = db.ChatRoom.Find(id);
-            if (chatRoom == null)
+            ChatMessage chatMessage = db.ChatMessage.Find(id);
+            if (chatMessage == null)
             {
                 return NotFound();
             }
 
-            db.ChatRoom.Remove(chatRoom);
+            db.ChatMessage.Remove(chatMessage);
             db.SaveChanges();
 
-            return Ok(chatRoom);
+            return Ok(chatMessage);
         }
 
         protected override void Dispose(bool disposing)
@@ -114,9 +111,9 @@ namespace WebAppTrue.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ChatRoomExists(int id)
+        private bool ChatMessageExists(int id)
         {
-            return db.ChatRoom.Count(e => e.id == id) > 0;
+            return db.ChatMessage.Count(e => e.id == id) > 0;
         }
     }
 }

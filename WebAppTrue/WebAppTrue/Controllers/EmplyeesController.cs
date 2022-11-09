@@ -18,9 +18,9 @@ namespace WebAppTrue.Controllers
 
 
         // GET: api/Emplyees
-        public IQueryable<Emplyee> GetEmplyee()
+        public IHttpActionResult GetEmplyee()
         {
-            return db.Emplyee;
+            return Ok(db.Emplyee.ToList().ConvertAll(i => new ResponeEmployee(i)));
         }
 
         // GET: api/Emplyees/5

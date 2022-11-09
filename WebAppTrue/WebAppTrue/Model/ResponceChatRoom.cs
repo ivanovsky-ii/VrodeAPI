@@ -10,11 +10,12 @@ namespace WebAppTrue.Model
     {
         public ResponceChatRoom(ChatRoom chatRoom)
         {
+            id = chatRoom.id;
             Topic = chatRoom.Topic;
-            LastMessage = chatRoom.GetLastMessage;
+            GetLastMessage = chatRoom.LastMessage;
         }
         public int id { get; set; }
         public string Topic { get; set; }
-        public string LastMessage { get; set; } 
+        public string GetLastMessage { get; set; } 
     }
 }

@@ -12,7 +12,7 @@ namespace WebAppTrue
         {
             id = emplyee.id;
             name = emplyee.name;
-            idType = emplyee.idType;   
+            idType = (int)emplyee.idType;   
             userName = emplyee.userName;
             password = emplyee.password;
         }

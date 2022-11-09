@@ -25,8 +25,8 @@ namespace WebAppTrue.Models
         public string Topic { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        internal virtual ICollection<ChatMessage> ChatMessage { get; set; }
+        public virtual ICollection<ChatMessage> ChatMessage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        internal virtual ICollection<ChatRoomEmploee> ChatRoomEmploee { get; set; }
+        public virtual ICollection<ChatRoomEmploee> ChatRoomEmploee { get; set; }
     }
 }

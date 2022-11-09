@@ -23,14 +23,14 @@ namespace WebAppTrue.Models
     
         public int id { get; set; }
         public string name { get; set; }
-        public int idType { get; set; }
+        public Nullable<int> idType { get; set; }
         public string userName { get; set; }
         public string password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        internal virtual ICollection<ChatMessage> ChatMessage { get; set; }
+        public virtual ICollection<ChatMessage> ChatMessage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        internal virtual ICollection<ChatRoomEmploee> ChatRoomEmploee { get; set; }
-        internal virtual Type Type { get; set; }
+        public virtual ICollection<ChatRoomEmploee> ChatRoomEmploee { get; set; }
+        public virtual Type Type { get; set; }
     }
 }

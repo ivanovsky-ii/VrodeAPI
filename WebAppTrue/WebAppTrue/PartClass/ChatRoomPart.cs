@@ -7,7 +7,7 @@ namespace WebAppTrue.Models
 {
     public partial class ChatRoom
     {
-        public string GetLastMessage
+        public string LastMessage
         {
             get
             {

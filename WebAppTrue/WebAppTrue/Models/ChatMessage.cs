@@ -20,7 +20,7 @@ namespace WebAppTrue.Models
         public string textMessage { get; set; }
         public Nullable<System.DateTime> dateTime { get; set; }
     
-        internal virtual ChatRoom ChatRoom { get; set; }
-        internal virtual Emplyee Emplyee { get; set; }
+        public virtual ChatRoom ChatRoom { get; set; }
+        public virtual Emplyee Emplyee { get; set; }
     }
 }

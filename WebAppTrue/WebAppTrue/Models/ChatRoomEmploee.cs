@@ -17,8 +17,8 @@ namespace WebAppTrue.Models
         public int id { get; set; }
         public Nullable<int> idChatRoom { get; set; }
         public Nullable<int> idEmplyee { get; set; }
-
-        internal virtual ChatRoom ChatRoom { get; set; }
-        internal virtual Emplyee Emplyee { get; set; }
+    
+        public virtual ChatRoom ChatRoom { get; set; }
+        public virtual Emplyee Emplyee { get; set; }
     }
 }
