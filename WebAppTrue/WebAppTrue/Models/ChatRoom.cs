@@ -11,7 +11,8 @@ namespace WebAppTrue.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using static WebAppTrue.Controllers.ChatRoomsController;
+
     public partial class ChatRoom
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,13 +21,26 @@ namespace WebAppTrue.Models
             this.ChatMessage = new HashSet<ChatMessage>();
             this.ChatRoomEmploee = new HashSet<ChatRoomEmploee>();
         }
-    
+
         public int id { get; set; }
         public string Topic { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChatMessage> ChatMessage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChatRoomEmploee> ChatRoomEmploee { get; set; }
+
+
+        
     }
+
+    public partial class ChatRoom
+    {
+        public ChatRoom(SimpleChatroom simple)
+        {
+            this.id = id;
+            this.Topic = simple.Topic;
+        }   
+    }
+
 }

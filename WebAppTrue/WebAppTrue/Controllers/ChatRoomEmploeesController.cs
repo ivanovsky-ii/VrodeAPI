@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,21 +7,65 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebAppTrue.Model;
 using WebAppTrue.Models;
+using static WebAppTrue.Controllers.ChatRoomsController;
 
 namespace WebAppTrue.Controllers
 {
     public class ChatRoomEmploeesController : ApiController
     {
-        private ForAPIEntities db = new ForAPIEntities();
+        private chatAPIEntities db = new chatAPIEntities();
+
+
+        public class SimpleER
+        {
+            public SimpleER(int id, int? idChatRoom, int? idEmplyee)
+            {
+                this.id = id;
+                this.idChatRoom = idChatRoom;
+                this.idEmplyee = idEmplyee;
+            }
+
+            public int id { get; set; }
+            public Nullable<int> idChatRoom { get; set; }
+            public Nullable<int> idEmplyee { get; set; }
+        }
+
+        [HttpPost]
+        [Route("api/AREC/{idUser}")]
+        public async Task<IHttpActionResult> AREC([FromBody] SimpleChatroom simmmer, [FromUri] int idUser)
+
+        {
+            ChatRoom chr = new ChatRoom();
+            chr.id = simmmer.id;
+            chr.Topic = simmmer.Topic;
+            db.ChatRoom.Add(chr);
+
+            try
+            {
+                SimpleER simple = new SimpleER(1, simmmer.id, idUser);
+                ChatRoomEmploee chatRoomEmploee = new ChatRoomEmploee(simple);
+                db.ChatRoomEmploee.Add(chatRoomEmploee);
+                return Ok(await db.SaveChangesAsync());
+
+            }
+            catch 
+            {
+                 return BadRequest();
+            }
+        }
+
 
         // GET: api/ChatRoomEmploees
         public IHttpActionResult GetChatroomEmploee()
         {
-            return Ok(db.ChatRoomEmploee.ToList().ConvertAll(i => new ResponceChatRoomEmployee(i)));
+            var reuslt = db.ChatRoomEmploee.ToList();
+            var result1 = reuslt.ConvertAll(i => new ResponceChatRoomEmployee(i));
+            return Ok(result1);
         }
 
         // GET: api/ChatRoomEmploees/5
@@ -33,7 +78,7 @@ namespace WebAppTrue.Controllers
                 return NotFound();
             }
 
-            return Ok(chatRoomEmploee);
+            return Ok(new ResponceChatRoomEmployee(chatRoomEmploee));
         }
 
         // PUT: api/ChatRoomEmploees/5

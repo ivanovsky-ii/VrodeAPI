@@ -1,33 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="ForAPIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityContainer Name="ForAPIEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="ChatMessage" EntityType="ForAPIModel.ChatMessage" />
-    <EntitySet Name="ChatRoom" EntityType="ForAPIModel.ChatRoom" />
-    <EntitySet Name="ChatRoomEmploee" EntityType="ForAPIModel.ChatRoomEmploee" />
-    <EntitySet Name="Emplyee" EntityType="ForAPIModel.Emplyee" />
-    <EntitySet Name="sysdiagrams" EntityType="ForAPIModel.sysdiagrams" />
-    <EntitySet Name="Type" EntityType="ForAPIModel.Type" />
-    <AssociationSet Name="FK_ChatMessage_ChatRoom" Association="ForAPIModel.FK_ChatMessage_ChatRoom">
-      <End Role="ChatRoom" EntitySet="ChatRoom" />
-      <End Role="ChatMessage" EntitySet="ChatMessage" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ChatMessage_Emplyee" Association="ForAPIModel.FK_ChatMessage_Emplyee">
-      <End Role="Emplyee" EntitySet="Emplyee" />
-      <End Role="ChatMessage" EntitySet="ChatMessage" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ChatRoomEmploee_ChatRoom" Association="ForAPIModel.FK_ChatRoomEmploee_ChatRoom">
-      <End Role="ChatRoom" EntitySet="ChatRoom" />
-      <End Role="ChatRoomEmploee" EntitySet="ChatRoomEmploee" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ChatRoomEmploee_Emplyee" Association="ForAPIModel.FK_ChatRoomEmploee_Emplyee">
-      <End Role="Emplyee" EntitySet="Emplyee" />
-      <End Role="ChatRoomEmploee" EntitySet="ChatRoomEmploee" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Emplyee_Type" Association="ForAPIModel.FK_Emplyee_Type">
-      <End Role="Type" EntitySet="Type" />
-      <End Role="Emplyee" EntitySet="Emplyee" />
-    </AssociationSet>
-  </EntityContainer>
+<Schema Namespace="chatAPIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="ChatMessage">
     <Key>
       <PropertyRef Name="id" />
@@ -37,8 +9,8 @@
     <Property Name="idChatRoom" Type="Int32" />
     <Property Name="textMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="dateTime" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="ChatRoom" Relationship="ForAPIModel.FK_ChatMessage_ChatRoom" FromRole="ChatMessage" ToRole="ChatRoom" />
-    <NavigationProperty Name="Emplyee" Relationship="ForAPIModel.FK_ChatMessage_Emplyee" FromRole="ChatMessage" ToRole="Emplyee" />
+    <NavigationProperty Name="ChatRoom" Relationship="Self.FK_ChatMessage_ChatRoom" FromRole="ChatMessage" ToRole="ChatRoom" />
+    <NavigationProperty Name="Emplyee" Relationship="Self.FK_ChatMessage_Emplyee" FromRole="ChatMessage" ToRole="Emplyee" />
   </EntityType>
   <EntityType Name="ChatRoom">
     <Key>
@@ -46,8 +18,8 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Topic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="ChatMessage" Relationship="ForAPIModel.FK_ChatMessage_ChatRoom" FromRole="ChatRoom" ToRole="ChatMessage" />
-    <NavigationProperty Name="ChatRoomEmploee" Relationship="ForAPIModel.FK_ChatRoomEmploee_ChatRoom" FromRole="ChatRoom" ToRole="ChatRoomEmploee" />
+    <NavigationProperty Name="ChatMessage" Relationship="Self.FK_ChatMessage_ChatRoom" FromRole="ChatRoom" ToRole="ChatMessage" />
+    <NavigationProperty Name="ChatRoomEmploee" Relationship="Self.FK_ChatRoomEmploee_ChatRoom" FromRole="ChatRoom" ToRole="ChatRoomEmploee" />
   </EntityType>
   <EntityType Name="ChatRoomEmploee">
     <Key>
@@ -56,8 +28,8 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idChatRoom" Type="Int32" />
     <Property Name="idEmplyee" Type="Int32" />
-    <NavigationProperty Name="ChatRoom" Relationship="ForAPIModel.FK_ChatRoomEmploee_ChatRoom" FromRole="ChatRoomEmploee" ToRole="ChatRoom" />
-    <NavigationProperty Name="Emplyee" Relationship="ForAPIModel.FK_ChatRoomEmploee_Emplyee" FromRole="ChatRoomEmploee" ToRole="Emplyee" />
+    <NavigationProperty Name="ChatRoom" Relationship="Self.FK_ChatRoomEmploee_ChatRoom" FromRole="ChatRoomEmploee" ToRole="ChatRoom" />
+    <NavigationProperty Name="Emplyee" Relationship="Self.FK_ChatRoomEmploee_Emplyee" FromRole="ChatRoomEmploee" ToRole="Emplyee" />
   </EntityType>
   <EntityType Name="Emplyee">
     <Key>
@@ -68,15 +40,15 @@
     <Property Name="idType" Type="Int32" />
     <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="ChatMessage" Relationship="ForAPIModel.FK_ChatMessage_Emplyee" FromRole="Emplyee" ToRole="ChatMessage" />
-    <NavigationProperty Name="ChatRoomEmploee" Relationship="ForAPIModel.FK_ChatRoomEmploee_Emplyee" FromRole="Emplyee" ToRole="ChatRoomEmploee" />
-    <NavigationProperty Name="Type" Relationship="ForAPIModel.FK_Emplyee_Type" FromRole="Emplyee" ToRole="Type" />
+    <NavigationProperty Name="ChatMessage" Relationship="Self.FK_ChatMessage_Emplyee" FromRole="Emplyee" ToRole="ChatMessage" />
+    <NavigationProperty Name="ChatRoomEmploee" Relationship="Self.FK_ChatRoomEmploee_Emplyee" FromRole="Emplyee" ToRole="ChatRoomEmploee" />
+    <NavigationProperty Name="Type" Relationship="Self.FK_Emplyee_Type" FromRole="Emplyee" ToRole="Type" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
       <PropertyRef Name="diagram_id" />
     </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="principal_id" Type="Int32" Nullable="false" />
     <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="version" Type="Int32" />
@@ -88,11 +60,11 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Emplyee" Relationship="ForAPIModel.FK_Emplyee_Type" FromRole="Type" ToRole="Emplyee" />
+    <NavigationProperty Name="Emplyee" Relationship="Self.FK_Emplyee_Type" FromRole="Type" ToRole="Emplyee" />
   </EntityType>
   <Association Name="FK_ChatMessage_ChatRoom">
-    <End Type="ForAPIModel.ChatRoom" Role="ChatRoom" Multiplicity="0..1" />
-    <End Type="ForAPIModel.ChatMessage" Role="ChatMessage" Multiplicity="*" />
+    <End Role="ChatRoom" Type="Self.ChatRoom" Multiplicity="0..1" />
+    <End Role="ChatMessage" Type="Self.ChatMessage" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChatRoom">
         <PropertyRef Name="id" />
@@ -103,8 +75,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ChatMessage_Emplyee">
-    <End Type="ForAPIModel.Emplyee" Role="Emplyee" Multiplicity="0..1" />
-    <End Type="ForAPIModel.ChatMessage" Role="ChatMessage" Multiplicity="*" />
+    <End Role="Emplyee" Type="Self.Emplyee" Multiplicity="0..1" />
+    <End Role="ChatMessage" Type="Self.ChatMessage" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Emplyee">
         <PropertyRef Name="id" />
@@ -115,8 +87,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ChatRoomEmploee_ChatRoom">
-    <End Type="ForAPIModel.ChatRoom" Role="ChatRoom" Multiplicity="0..1" />
-    <End Type="ForAPIModel.ChatRoomEmploee" Role="ChatRoomEmploee" Multiplicity="*" />
+    <End Role="ChatRoom" Type="Self.ChatRoom" Multiplicity="0..1" />
+    <End Role="ChatRoomEmploee" Type="Self.ChatRoomEmploee" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChatRoom">
         <PropertyRef Name="id" />
@@ -127,8 +99,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ChatRoomEmploee_Emplyee">
-    <End Type="ForAPIModel.Emplyee" Role="Emplyee" Multiplicity="0..1" />
-    <End Type="ForAPIModel.ChatRoomEmploee" Role="ChatRoomEmploee" Multiplicity="*" />
+    <End Role="Emplyee" Type="Self.Emplyee" Multiplicity="0..1" />
+    <End Role="ChatRoomEmploee" Type="Self.ChatRoomEmploee" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Emplyee">
         <PropertyRef Name="id" />
@@ -139,8 +111,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Emplyee_Type">
-    <End Type="ForAPIModel.Type" Role="Type" Multiplicity="0..1" />
-    <End Type="ForAPIModel.Emplyee" Role="Emplyee" Multiplicity="*" />
+    <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+    <End Role="Emplyee" Type="Self.Emplyee" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Type">
         <PropertyRef Name="id" />
@@ -150,4 +122,73 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityContainer Name="chatAPIEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ChatMessage" EntityType="Self.ChatMessage" />
+    <EntitySet Name="ChatRoom" EntityType="Self.ChatRoom" />
+    <EntitySet Name="ChatRoomEmploee" EntityType="Self.ChatRoomEmploee" />
+    <EntitySet Name="Emplyee" EntityType="Self.Emplyee" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Type" EntityType="Self.Type" />
+    <AssociationSet Name="FK_ChatMessage_ChatRoom" Association="Self.FK_ChatMessage_ChatRoom">
+      <End Role="ChatRoom" EntitySet="ChatRoom" />
+      <End Role="ChatMessage" EntitySet="ChatMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChatMessage_Emplyee" Association="Self.FK_ChatMessage_Emplyee">
+      <End Role="Emplyee" EntitySet="Emplyee" />
+      <End Role="ChatMessage" EntitySet="ChatMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChatRoomEmploee_ChatRoom" Association="Self.FK_ChatRoomEmploee_ChatRoom">
+      <End Role="ChatRoom" EntitySet="ChatRoom" />
+      <End Role="ChatRoomEmploee" EntitySet="ChatRoomEmploee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChatRoomEmploee_Emplyee" Association="Self.FK_ChatRoomEmploee_Emplyee">
+      <End Role="Emplyee" EntitySet="Emplyee" />
+      <End Role="ChatRoomEmploee" EntitySet="ChatRoomEmploee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Emplyee_Type" Association="Self.FK_Emplyee_Type">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="Emplyee" EntitySet="Emplyee" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(chatAPIModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(chatAPIModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
 </Schema>

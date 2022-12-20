@@ -7,7 +7,7 @@ namespace WebAppTrue.Models
 {
     public partial class ChatMessage
     {
-        private ForAPIEntities db = new ForAPIEntities();
+        private chatAPIEntities db = new chatAPIEntities();
         public string takeMessage
         {
             get

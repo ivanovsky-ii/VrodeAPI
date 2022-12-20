@@ -14,7 +14,7 @@ namespace WebAppTrue.Controllers
 {
     public class EmplyeesController : ApiController
     {
-        private ForAPIEntities db = new ForAPIEntities();
+        private chatAPIEntities db = new chatAPIEntities();
 
 
         // GET: api/Emplyees

@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="181eddb5266d4faaab3af1b2f8e4c69f" Name="Diagram1" ZoomLevel="106">
-        <EntityTypeShape EntityType="ForAPIModel.ChatMessage" Width="1.5" PointX="5.25" PointY="3.5" />
-        <EntityTypeShape EntityType="ForAPIModel.ChatRoom" Width="1.5" PointX="3" PointY="7.25" />
-        <EntityTypeShape EntityType="ForAPIModel.ChatRoomEmploee" Width="1.5" PointX="5.25" PointY="0.75" />
-        <EntityTypeShape EntityType="ForAPIModel.Emplyee" Width="1.5" PointX="3" PointY="3.5" />
-        <EntityTypeShape EntityType="ForAPIModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="6.875" />
-        <EntityTypeShape EntityType="ForAPIModel.Type" Width="1.5" PointX="0.75" PointY="4" />
-        <AssociationConnector Association="ForAPIModel.FK_ChatMessage_ChatRoom" />
-        <AssociationConnector Association="ForAPIModel.FK_ChatMessage_Emplyee" />
-        <AssociationConnector Association="ForAPIModel.FK_ChatRoomEmploee_ChatRoom" />
-        <AssociationConnector Association="ForAPIModel.FK_ChatRoomEmploee_Emplyee" />
-        <AssociationConnector Association="ForAPIModel.FK_Emplyee_Type" />
+      <Diagram DiagramId="9bf384756b8243b9a73305282ea34f63" Name="Diagram1">
+        <EntityTypeShape EntityType="chatAPIModel.ChatMessage" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="chatAPIModel.ChatRoom" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="chatAPIModel.ChatRoomEmploee" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="chatAPIModel.Emplyee" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="chatAPIModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="chatAPIModel.Type" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="chatAPIModel.FK_ChatMessage_ChatRoom" ManuallyRouted="false" />
+        <AssociationConnector Association="chatAPIModel.FK_ChatMessage_Emplyee" ManuallyRouted="false" />
+        <AssociationConnector Association="chatAPIModel.FK_ChatRoomEmploee_ChatRoom" ManuallyRouted="false" />
+        <AssociationConnector Association="chatAPIModel.FK_ChatRoomEmploee_Emplyee" ManuallyRouted="false" />
+        <AssociationConnector Association="chatAPIModel.FK_Emplyee_Type" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

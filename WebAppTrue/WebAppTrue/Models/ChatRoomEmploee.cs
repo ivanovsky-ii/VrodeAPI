@@ -11,7 +11,10 @@ namespace WebAppTrue.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Security.Policy;
+    using System.Web.Management;
+    using static WebAppTrue.Controllers.ChatRoomEmploeesController;
+
     public partial class ChatRoomEmploee
     {
         public int id { get; set; }
@@ -20,5 +23,22 @@ namespace WebAppTrue.Models
     
         public virtual ChatRoom ChatRoom { get; set; }
         public virtual Emplyee Emplyee { get; set; }
+
+        
     }
+
+    public partial class ChatRoomEmploee
+    {
+        public ChatRoomEmploee(SimpleER simer)
+        {
+            this.id = simer.id;
+            this.idChatRoom = simer.idChatRoom;
+            this.idEmplyee = simer.idEmplyee;
+        }
+        public ChatRoomEmploee() { }
+    }
+
+    
+
+
 }

@@ -6,6 +6,8 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography.Pkcs;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebAppTrue.Model;
@@ -15,7 +17,35 @@ namespace WebAppTrue.Controllers
 {
     public class ChatRoomsController : ApiController
     {
-        private ForAPIEntities db = new ForAPIEntities();
+        private chatAPIEntities db = new chatAPIEntities();
+
+
+
+        public class SimpleChatroom
+        {
+            public SimpleChatroom(int id, string topic)
+            {
+                this.id = id;
+                this.Topic = topic;
+            }
+            public int id { get; set; }
+            public string Topic { get; set; }
+        }
+
+
+
+        [HttpPost]
+        [Route ("api/CreateNewChatRoom")]
+     
+        public async Task<IHttpActionResult> CreateNewChatroom([FromBody] SimpleChatroom simpleChatroom)
+        {
+            ChatRoom chatRoom = new ChatRoom(simpleChatroom);
+            db.ChatRoom.Add(chatRoom);
+            await db.SaveChangesAsync(); 
+            return Ok(new SimpleChatroom(chatRoom.id, chatRoom.Topic));
+        }
+
+
 
         // GET: api/ChatRooms
         //[HttpGet]

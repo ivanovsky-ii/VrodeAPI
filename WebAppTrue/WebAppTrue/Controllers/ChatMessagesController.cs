@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,6 +7,9 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebAppTrue.Model;
@@ -15,7 +19,36 @@ namespace WebAppTrue.Controllers
 {
     public class ChatMessagesController : ApiController
     {
-        private ForAPIEntities db = new ForAPIEntities();
+        private chatAPIEntities db = new chatAPIEntities();
+
+        public class SimpleChatMessage
+        {
+            public SimpleChatMessage(int id, int? idEmplyee, int? idChatRoom, string textMessage, DateTime date)
+            {
+                this.id = id;
+                this.idEmplyee = idEmplyee;
+                this.idChatRoom = idChatRoom;
+                this.textMessage = textMessage;
+                this.dateTime = date;
+            }
+
+            public int id { get; set; }
+            public Nullable<int> idEmplyee { get; set; }
+            public Nullable<int> idChatRoom { get; set; }
+            public string textMessage { get; set; }
+            public Nullable<System.DateTime> dateTime { get; set; }
+
+        }
+
+        [HttpPost]
+        [Route("api/WTMFmessage")]
+        [ResponseType(typeof(ChatMessage))]
+        public async Task<IHttpActionResult> WTMFmessage([FromBody] SimpleChatMessage simmesuuuuuuuuuuuuuuuuuuuuuu)
+        {
+            ChatMessage chat = new ChatMessage(simmesuuuuuuuuuuuuuuuuuuuuuu);
+            db.ChatMessage.Add(chat);
+            return Ok(await db.SaveChangesAsync());
+        }
 
         // GET: api/ChatMessages
         public IHttpActionResult GetChatMessage()
